@@ -1,7 +1,6 @@
 "use client"
 
 import type { PersonalInfo } from "../types/cv.types"
-import Image from "next/image"
 import { useState } from "react"
 
 interface HeaderProps {
@@ -34,7 +33,7 @@ export default function Header({ data }: HeaderProps) {
   return (
     <header className="relative overflow-hidden">
       {/* Imagen de portada con overlay mejorado */}
-      <div className="relative h-64 md:h-80 bg-gradient-to-r from-pink-200 via-pink-100 to-purple-200 dark:from-purple-900 dark:via-purple-800 dark:to-pink-900">
+      <div className="relative h-64 md:h-80">
         {data.avatar ? (
           <img
             src={data.avatar || "/placeholder.svg"}

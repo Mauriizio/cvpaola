@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { createContext, useContext, useEffect, useState } from "react"
 
 type Theme = "dark" | "light"
@@ -34,35 +33,48 @@ export function ThemeProvider({
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    // Solo ejecutar en el cliente
+    if (typeof window === "undefined") return
+
     const root = window.document.documentElement
+
+    // Obtener tema guardado
+    const savedTheme = localStorage.getItem(storageKey) as Theme
+    const initialTheme = savedTheme || defaultTheme
 
     // Limpiar todas las clases de tema
     root.classList.remove("light", "dark")
 
-    // Obtener tema guardado o usar el por defecto
-    const savedTheme = localStorage.getItem(storageKey) as Theme
-    const initialTheme = savedTheme || defaultTheme
-
-    // Aplicar el tema
+    // Aplicar el tema correcto
     root.classList.add(initialTheme)
     setTheme(initialTheme)
     setMounted(true)
   }, [defaultTheme, storageKey])
 
-  useEffect(() => {
-    if (!mounted) return
-
-    const root = window.document.documentElement
-    root.classList.remove("light", "dark")
-    root.classList.add(theme)
-  }, [theme, mounted])
-
   const value = {
     theme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme)
-      setTheme(theme)
+    setTheme: (newTheme: Theme) => {
+      if (typeof window === "undefined") return
+
+      const root = window.document.documentElement
+
+      // Limpiar clases anteriores
+      root.classList.remove("light", "dark")
+
+      // Aplicar nueva clase
+      root.classList.add(newTheme)
+
+      // Guardar en localStorage
+      localStorage.setItem(storageKey, newTheme)
+
+      // Actualizar estado
+      setTheme(newTheme)
     },
+  }
+
+  // No renderizar hasta que esté montado para evitar hydration mismatch
+  if (!mounted) {
+    return <div style={{ visibility: "hidden" }}>{children}</div>
   }
 
   return (

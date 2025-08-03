@@ -1,48 +1,48 @@
 @import "tailwindcss";
 
 :root {
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
-  --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
-  --primary: 222.2 47.4% 11.2%;
-  --primary-foreground: 210 40% 98%;
-  --secondary: 210 40% 96%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
-  --muted: 210 40% 96%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-  --accent: 210 40% 96%;
-  --accent-foreground: 222.2 47.4% 11.2%;
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 222.2 84% 4.9%;
+  --background: 255 255 255;
+  --foreground: 15 23 42;
+  --card: 255 255 255;
+  --card-foreground: 15 23 42;
+  --popover: 255 255 255;
+  --popover-foreground: 15 23 42;
+  --primary: 219 39 119;
+  --primary-foreground: 255 255 255;
+  --secondary: 248 250 252;
+  --secondary-foreground: 15 23 42;
+  --muted: 248 250 252;
+  --muted-foreground: 100 116 139;
+  --accent: 248 250 252;
+  --accent-foreground: 15 23 42;
+  --destructive: 239 68 68;
+  --destructive-foreground: 255 255 255;
+  --border: 226 232 240;
+  --input: 226 232 240;
+  --ring: 219 39 119;
   --radius: 0.5rem;
 }
 
 .dark {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
-  --card: 222.2 84% 4.9%;
-  --card-foreground: 210 40% 98%;
-  --popover: 222.2 84% 4.9%;
-  --popover-foreground: 210 40% 98%;
-  --primary: 210 40% 98%;
-  --primary-foreground: 222.2 47.4% 11.2%;
-  --secondary: 217.2 32.6% 17.5%;
-  --secondary-foreground: 210 40% 98%;
-  --muted: 217.2 32.6% 17.5%;
-  --muted-foreground: 215 20.2% 65.1%;
-  --accent: 217.2 32.6% 17.5%;
-  --accent-foreground: 210 40% 98%;
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 217.2 32.6% 17.5%;
-  --input: 217.2 32.6% 17.5%;
-  --ring: 212.7 26.8% 83.9%;
+  --background: 2 6 23;
+  --foreground: 248 250 252;
+  --card: 15 23 42;
+  --card-foreground: 248 250 252;
+  --popover: 15 23 42;
+  --popover-foreground: 248 250 252;
+  --primary: 236 72 153;
+  --primary-foreground: 15 23 42;
+  --secondary: 30 41 59;
+  --secondary-foreground: 248 250 252;
+  --muted: 30 41 59;
+  --muted-foreground: 148 163 184;
+  --accent: 30 41 59;
+  --accent-foreground: 248 250 252;
+  --destructive: 220 38 38;
+  --destructive-foreground: 248 250 252;
+  --border: 30 41 59;
+  --input: 30 41 59;
+  --ring: 236 72 153;
 }
 
 @layer base {
@@ -58,20 +58,24 @@
 
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: rgb(var(--background));
+    color: rgb(var(--foreground));
     min-height: 100vh;
     line-height: 1.8;
     transition:
       background-color 0.3s ease,
       color 0.3s ease;
-    /* Colores por defecto para modo claro */
-    background-color: #fafafa;
-    color: #1a1a1a;
   }
 
-  /* Modo oscuro */
+  /* Asegurar que el modo claro tenga fondo blanco */
+  .light body {
+    background-color: #fafafa;
+    color: #1e293b;
+  }
+
   .dark body {
-    background-color: #0a0a0a;
-    color: #e5e5e5;
+    background-color: #020617;
+    color: #f8fafc;
   }
 
   /* Más espacio en títulos */
@@ -131,12 +135,12 @@
   }
 
   /* Sombras suaves - modo claro */
-  .soft-shadow {
+  .light .soft-shadow {
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
     transition: box-shadow 0.3s ease;
   }
 
-  .soft-shadow:hover {
+  .light .soft-shadow:hover {
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   }
 
@@ -150,45 +154,81 @@
   }
 
   /* Efectos de glassmorphism */
-  .glass-effect {
+  .light .glass-effect {
     backdrop-filter: blur(10px);
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.1);
   }
 
   .dark .glass-effect {
+    backdrop-filter: blur(10px);
     background: rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  /* Scrollbar personalizada */
-  ::-webkit-scrollbar {
+  /* Scrollbar personalizada - modo claro */
+  .light ::-webkit-scrollbar {
     width: 8px;
   }
 
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+  .light ::-webkit-scrollbar-track {
+    background: #f1f5f9;
   }
 
-  .dark ::-webkit-scrollbar-track {
-    background: #2a2a2a;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
+  .light ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
     border-radius: 4px;
   }
 
-  .dark ::-webkit-scrollbar-thumb {
-    background: #555;
+  .light ::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
   }
 
-  ::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
+  /* Scrollbar personalizada - modo oscuro */
+  .dark ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .dark ::-webkit-scrollbar-track {
+    background: #1e293b;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background: #475569;
+    border-radius: 4px;
   }
 
   .dark ::-webkit-scrollbar-thumb:hover {
-    background: #777;
+    background: #64748b;
+  }
+
+  /* Animación de typing para el título */
+  .typing-animation {
+    overflow: hidden;
+    border-right: 2px solid #f8deff;
+    white-space: nowrap;
+    animation:
+      typing 3s steps(40, end),
+      blink-caret 0.75s step-end infinite;
+  }
+
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  @keyframes blink-caret {
+    from,
+    to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: #f8deff;
+    }
   }
 
   /* Efectos de hover mejorados */
@@ -202,15 +242,16 @@
     transform: translateY(-5px);
   }
 
-  /* Gradientes personalizados */
-  .gradient-pink {
-    background: linear-gradient(135deg, #f8deff 0%, #e879f9 100%);
+  /* Gradientes personalizados - modo claro */
+  .light .gradient-pink {
+    background: linear-gradient(135deg, #fdf2f8 0%, #f9a8d4 100%);
   }
 
-  .gradient-purple {
-    background: linear-gradient(135deg, #e879f9 0%, #a855f7 100%);
+  .light .gradient-purple {
+    background: linear-gradient(135deg, #f9a8d4 0%, #c084fc 100%);
   }
 
+  /* Gradientes personalizados - modo oscuro */
   .dark .gradient-pink {
     background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
   }
