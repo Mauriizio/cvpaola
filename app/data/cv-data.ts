@@ -9,6 +9,7 @@ export const personalInfo: PersonalInfo = {
   linkedin: "https://www.linkedin.com/in/paola-valentina-morales-orozco/",
   github: "", // No tiene GitHub según indicaste
   avatar: "/fotoperfil.jpg",
+  fotoportada: "/portada.png", // Ruta de la imagen de portada
 }
 
 export const education: Education[] = [

@@ -35,14 +35,17 @@ export default function Header({ data }: HeaderProps) {
     <header className="relative overflow-hidden">
       {/* Imagen de portada con overlay mejorado */}
       <div className="relative h-64 md:h-80 bg-gradient-to-r from-pink-200 via-pink-100 to-purple-200 dark:from-purple-900 dark:via-purple-800 dark:to-pink-900">
-        <Image
-          src="/portada.png"
-          alt="Portada profesional"
-          width={1920}
-          height={300}
-          className="w-full h-full object-cover"
-          priority
-        />
+        {data.avatar ? (
+          <img
+            src={data.avatar || "/placeholder.svg"}
+            alt={`${data.nombre} ${data.apellidos}`}
+            className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-6xl bg-gradient-to-br from-pink-100 to-purple-100 dark:from-purple-900 dark:to-pink-900">
+            👩‍🔬
+          </div>
+        )}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white/30 dark:from-transparent dark:via-black/20 dark:to-black/40"></div>
 
         {/* Elementos decorativos flotantes */}

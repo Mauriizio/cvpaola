@@ -7,6 +7,7 @@ export interface PersonalInfo {
   linkedin?: string
   github?: string
   avatar?: string // Ruta de la imagen del avatar
+  fotoportada?: string // Ruta de la imagen de portada
 }
 
 export interface Education {
